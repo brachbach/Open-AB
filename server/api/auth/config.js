@@ -7,7 +7,11 @@ module.exports.passport = (app) => {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  const provideDummyData = function (cb) {
+  const provideDummyData = (cb) => {
+    cb(null, {email: 'ben@gmail.com', password: 'abc123'});
+  };
+
+  const dummyUserFind = (id, cb) => {
     cb(null, {email: 'ben@gmail.com', password: 'abc123'});
   };
 
@@ -17,7 +21,7 @@ module.exports.passport = (app) => {
     },
     (username, password, done) => {
       provideDummyData((err, user) => { //this is where to query the db
-        console.log(err, user);
+        // console.log(err, user);
         if (err) { return done(err); }
         if (!user) {
           return done(null, false, { message: 'Incorrect email.' });
@@ -25,7 +29,7 @@ module.exports.passport = (app) => {
         if (user.password !== password) {  //need to use bcrypt here
           return done(null, false, { message: 'Incorrect password.' });
         }
-        console.log(done);
+        // console.log(done);
         return done(null, user);
       });
     }
@@ -36,7 +40,9 @@ module.exports.passport = (app) => {
   });
 
   passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => {
+    // User.findById(id, (err, user) => {  
+    dummyUserFind(id, (err, user) => {
+      console.log('deserialed user:', user);
       done(err, user);
     });
   });

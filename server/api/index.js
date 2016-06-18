@@ -15,7 +15,6 @@ app.use(bodyParser.urlencoded({extended: true})); //make sure this is necessary
 app.use(bodyParser.json());
 app.use(cookieParser());
 authConfig(app); 
-authRoutes(app);
 
 app.get('/', (req, res) => {
   res.send('serving up static files!');
@@ -31,6 +30,8 @@ app.post('/api/email', auth.checkEmail);
 app.post('/api/signup', auth.signUp);
 app.post('/api/signin', auth.signIn);
 // end test route for DB
+authRoutes(app);
+
 
 app.listen(port, (err) => {
   if (err) {
