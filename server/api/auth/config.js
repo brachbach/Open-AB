@@ -16,13 +16,13 @@ module.exports.passport = (app) => {
       passwordField: 'password',
     },
     (username, password, done) => {
-      provideDummyData((err, user) => {
+      provideDummyData((err, user) => { //this is where to query the db
         console.log(err, user);
         if (err) { return done(err); }
         if (!user) {
           return done(null, false, { message: 'Incorrect email.' });
         }
-        if (user.password !== 'abc123') {
+        if (user.password !== password) {  //need to use bcrypt here
           return done(null, false, { message: 'Incorrect password.' });
         }
         console.log(done);

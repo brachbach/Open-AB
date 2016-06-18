@@ -1,9 +1,6 @@
-const passport = require('passport');
+const authController = require('./controller');
 
 module.exports = (app) => {
-  app.post('/signin',
-    passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/login',
-                                   })
-    );
+  app.post('/signin', authController.signin);
+  // app.post('')
 };
