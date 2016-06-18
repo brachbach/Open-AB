@@ -1,5 +1,9 @@
+const passport = require('passport');
 
-
-app.get('/', (req, res) => {
-  res.send('serving up static files!');
-});
+module.exports = (app) => {
+  app.post('/signin',
+    passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login',
+                                   })
+    );
+};
