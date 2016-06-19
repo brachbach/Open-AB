@@ -1,15 +1,17 @@
 const expressSession = require('express-session');
 const passport = require('passport');
 const bcrypt = require('bcrypt-nodejs');
+const flash = require('connect-flash');
 const LocalStrategy = require('passport-local').Strategy;
 
 module.exports.passport = (app) => {
   app.use(expressSession({ secret: 'keyboard cat' }));
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(flash());
 
   const dummyLookForUserInDB = (cb) => {
-    cb(null, {email: 'ben@gmail.com', password: '$2a$10$yZct6A/xiP55dFJI9RRabO8y4dcpydRCTqkCLE9GzzJjl35X9huuu'});
+    cb(null, null); //{error: 'dummyLookForUserInDB error'} {email: 'ben@gmail.com', password: '$2a$10$yZct6A/xiP55dFJI9RRabO8y4dcpydRCTqkCLE9GzzJjl35X9huuu'}
   };
 
   const dummyUserFind = (id, cb) => {
@@ -23,11 +25,11 @@ module.exports.passport = (app) => {
     (email, password, done) => {
       dummyLookForUserInDB((err, user) => { //this is where to query the db
         // console.log(err, user);
-        if (err) { return done(err); }
+        if (err) { return done(err); } //erroring works well here, sends a 500
         if (!user) {
-          return done(null, false, { message: 'Incorrect email.' });
+          return done(null, false, { message: 'Incorrect email.' });  //still need to test this erroring
         }
-        if (!bcrypt.compareSync(password, user.password)) {  //need to use bcrypt here
+        if (!bcrypt.compareSync(password, user.password)) {  //still need to test this erroring
           return done(null, false, { message: 'Incorrect password.' });
         }
         // console.log(done);

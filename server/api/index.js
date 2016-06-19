@@ -16,6 +16,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 authConfig(app); 
 
+authRoutes(app);
+
 app.get('/', (req, res) => {
   res.send('serving up static files!');
 });
