@@ -11,7 +11,7 @@ const generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 };
 
-exports.signin = passport.authenticate('local', {successRedirect: '/', failureRedirect: '/', failureFlash: true}), //could simply put in the function to deal w/ errors here, I think 
+exports.signin = passport.authenticate('local', {successRedirect: '/success', failureRedirect: '/failure', failureFlash: true}), //could simply put in the function to deal w/ errors here, I think 
   
 exports.signup = (req, res, next) => {
   const email = req.body.email;
@@ -19,15 +19,23 @@ exports.signup = (req, res, next) => {
   const hashedPassword = generateHash(password);
   console.log('hashedPassword:', hashedPassword);
   dummyCreateUser(email, hashedPassword, (err, user) => {  //ought to validate email and password here
-    if (err) { return next(err); } //errors with a 500, which seems good
+    if (err) { return next(err); } //errors with a 500, which seems good; may want to redirect
     req.login(user, function(err) {  //I expect this to error properly
         if (err) { return next(err); }
         console.log('user to login with after signup:', user);
         console.log('logged in and redirecting');
-        return res.redirect('/');
+        return res.redirect('/success');
       });
     }
   );
+};
+
+exports.checkAuthServer = (req, res, next) => {
+  if (req.user) {   
+    next();
+  } else {
+    res.status(401).json({ message: 'not logged in' });
+  }
 };
 
 

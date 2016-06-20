@@ -1,10 +1,10 @@
 import React from 'react';
 
-function SignIn() {
+function SignUp() {
   return (
     <div>
-      <h2>Sign In</h2>
-      <form action="/api/signin" method="post">
+      <h2>Sign Up</h2>
+      <form action="/api/signup" method="post">
         <div>
           <label>Email:</label>
           <input id="email" type="text" name="email" />
@@ -24,4 +24,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignUp;
