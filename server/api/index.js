@@ -11,10 +11,10 @@ const port = process.env.PORT || 8080;
 
 
 app.use(express.static(`${__dirname}/../../client`));
-app.use(bodyParser.urlencoded({extended: true})); //make sure this is necessary 
+app.use(bodyParser.urlencoded({ extended: true })); // make sure this is necessary
 app.use(bodyParser.json());
 app.use(cookieParser());
-authConfig(app); 
+authConfig(app);
 
 authRoutes(app);
 

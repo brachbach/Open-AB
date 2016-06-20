@@ -18,7 +18,8 @@ module.exports.passport = (app) => {
     cb(null, {email: 'ben@gmail.com', password: '$2a$10$yZct6A/xiP55dFJI9RRabO8y4dcpydRCTqkCLE9GzzJjl35X9huuu'});
   };
 
-  passport.use(new LocalStrategy( {
+  passport.use(new LocalStrategy(
+    {
       usernameField: 'email',
       passwordField: 'password',
     },
