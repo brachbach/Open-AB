@@ -54,11 +54,3 @@ module.exports.passport = (app) => {
     });
   });
 };
-
-module.exports.db = {
-  db: {
-    host: 'localhost',
-    port: 5432,
-    dbName: 'openab',
-  },
-};

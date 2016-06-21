@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-const authConfig = require('./auth/config.js').passport;
+const authConfig = require('./auth/config.js');
 const authRoutes = require('./auth/routes.js');
 
 const app = express();
