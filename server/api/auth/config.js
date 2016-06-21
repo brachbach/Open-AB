@@ -33,8 +33,8 @@ module.exports = (app) => {
           return done(null, false, { message: 'Incorrect email.' });  //still need to test this erroring
         }
         let user = result.rows[0];
-        console.log('password:', password);
-        console.log('user', user);
+        // console.log('password:', password);
+        // console.log('user', user);
         if (!bcrypt.compareSync(password, user.password)) {  //still need to test this erroring
           console.log('wrong password');
           return done(null, false, { message: 'Incorrect password.' });
@@ -46,7 +46,7 @@ module.exports = (app) => {
   ));
 
   passport.serializeUser((user, done) => {
-    console.log('serializeUser:', user);
+    // console.log('serializeUser:', user);
     done(null, user);
   });
 

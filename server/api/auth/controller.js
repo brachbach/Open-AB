@@ -16,7 +16,6 @@ exports.signup = (req, res, next) => {  // maybe refactor so that I'm only peeli
   const email = req.body.email;
   const password = req.body.password;
   const hashedPassword = generateHash(password);
-  // console.log('hashedPassword:', hashedPassword);
   dbQry.createClient(email, hashedPassword, (err, clientId) => {  // ought to validate email and password here
     if (err) { return next(err); } // errors with a 500, which seems good; may want to redirect
     return req.login(clientId, (error) => {  // I expect this to error properly
