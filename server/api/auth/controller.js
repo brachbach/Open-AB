@@ -11,16 +11,16 @@ const generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 };
 
-exports.signin = passport.authenticate('local', { successRedirect: '/success', failureRedirect: '/failure', failureFlash: true }); // could simply put in the function to deal w/ errors here, I think 
+exports.signin = passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/failure', failureFlash: true }); // could simply put in the function to deal w/ errors here, I think 
 
-exports.signup = (req, res, next) => {
+exports.signup = (req, res, next) => {  // maybe refactor so that I'm only peeling things off of rec here
   const email = req.body.email;
   const password = req.body.password;
   const hashedPassword = generateHash(password);
   console.log('hashedPassword:', hashedPassword);
   dummyCreateUser(email, hashedPassword, (err, user) => {  // ought to validate email and password here
-    if (err) { return next(err); } //errors with a 500, which seems good; may want to redirect
-    return req.login(user, (error) => {  //I expect this to error properly
+    if (err) { return next(err); } // errors with a 500, which seems good; may want to redirect
+    return req.login(user, (error) => {  // I expect this to error properly
       if (err) { return next(error); }
       console.log('user to login with after signup:', user);
       console.log('logged in and redirecting');
