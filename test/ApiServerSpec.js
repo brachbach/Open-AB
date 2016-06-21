@@ -17,7 +17,7 @@ describe('Signup:', () => {
 
 describe('Signin:', function() {
   it('signs in user with valid username and password and redirects them to dashboard', (done) => {  // not yet actually testing for redirect
-    var signupInfo = { email: 'ben2@gmail.com', password: 'abc123' };
+    var signupInfo = { email: 'ben@gmail.com', password: 'abc123' };
     request
       .post('/api/signin')
       .expect((res) => {
