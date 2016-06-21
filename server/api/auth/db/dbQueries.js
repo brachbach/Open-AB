@@ -1,6 +1,8 @@
 const db = require('./dbConnection');
 const qry = require('./dbQryStrs');
+const bcrypt = require('bcrypt-nodejs');
 
+const generateHash = password => bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 // check if client exists
 exports.checkEmail = (clientEmail, cb) => {
   db.query({
@@ -11,14 +13,16 @@ exports.checkEmail = (clientEmail, cb) => {
 
 // get all results in DB
 exports.createClient = (clientEmail, password, cb) => {
+  console.log('in create client');
   exports.checkEmail(clientEmail, (emailExists) => {
+    console.log('creating client');
     if (emailExists) {
       cb(null, false);
     } else {
-      // insert expensive operation to salt + hash password
+      const hashedPassword = generateHash(password);
       db.query({
         text: qry.createClient,
-        values: [clientEmail, password],
+        values: [clientEmail, hashedPassword],
       }, cb);
     }
   });

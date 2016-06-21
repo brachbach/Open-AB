@@ -1,5 +1,4 @@
 const passport = require('passport');
-const bcrypt = require('bcrypt-nodejs');
 const dbQry = require('./db/dbQueries');
 
 // const dummyCreateUser = (email, hashedPassword, cb) => {
@@ -8,15 +7,14 @@ const dbQry = require('./db/dbQueries');
 //   cb(null, { "email": "ben@gmail.com", "password": "abc123" }); // {error: 'dummyCreateUser error'}
 // };
 
-const generateHash = password => bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+
 
 exports.signin = passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/failure', failureFlash: true }); // could simply put in the function to deal w/ errors here, I think 
 
 exports.signup = (req, res, next) => {  // maybe refactor so that I'm only peeling things off of rec here
   const email = req.body.email;
   const password = req.body.password;
-  const hashedPassword = generateHash(password);
-  dbQry.createClient(email, hashedPassword, (err, clientId) => {  // ought to validate email and password here
+  dbQry.createClient(email, password, (err, clientId) => {  // ought to validate email and password here
     if (err) { return next(err); } // errors with a 500, which seems good; may want to redirect
     return req.login(clientId, (error) => {  // I expect this to error properly
       if (error) { return next(error); }

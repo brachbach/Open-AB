@@ -40,8 +40,26 @@ describe('Signup:', () => {
 });
 
 describe('Signin:', function() {
+
+  beforeEach((done) => {
+    db.query('DELETE FROM clients', (err, result) => {
+      if (err) {
+        console.error(err);
+      }
+      console.log('about to create client');
+      authDbQueries.createClient('test2@gmail.com', 'abcd123', (error, res) => {
+        console.log('back in test file');
+        if (error) {
+          console.error(error);
+        }
+        done();
+      });
+    });
+  });
+
+
   it('signs in user with valid username and password and redirects them to dashboard', (done) => {  // not yet actually testing for redirect
-    var signupInfo = { email: 'test@gmail.com', password: 'abc123' };
+    var signupInfo = { email: 'test2@gmail.com', password: 'abcd123' };
     request
       .post('/api/signin')
       .send(signupInfo)
