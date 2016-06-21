@@ -11,9 +11,6 @@ module.exports = {
         test: /.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel',
-        query: {
-          presets: ['es2015', 'react'],
-        },
       },
       {
         test: /\.scss$/,
@@ -27,9 +24,4 @@ module.exports = {
   },
   output: { path: __dirname, filename: '/client/bundle.js' },
   plugins: [],
-  externals: {
-    'react/addons': true,
-    'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': true,
-  },
 };

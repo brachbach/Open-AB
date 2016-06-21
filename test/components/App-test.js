@@ -7,7 +7,8 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 
 describe("App Component", function() {
-  it("renders without issue", function() {
-    expect(mount(<App />).find('.app').length).toBe(1);
+  it("should render one h1", function() {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find('h1').length).toBe(1);
   });
 });
