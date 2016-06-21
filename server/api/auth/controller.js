@@ -29,6 +29,18 @@ exports.signup = (req, res, next) => {  // maybe refactor so that I'm only peeli
   });
 };
 
+exports.checkEmail = (req, res) => {
+  // hardcoded test vars
+  const clientEmail = 'abcd@abcd.com';
+  // end hardcoded test vars
+
+  dbQry.checkEmail(clientEmail, (error, result) => {
+    // result is postgres db row result
+    // result.rows[0].exists is boolean true if exists, false if not
+    res.status(201).send(result);
+  });
+};
+
 exports.checkAuthServer = (req, res, next) => {
   if (req.user) {
     next();

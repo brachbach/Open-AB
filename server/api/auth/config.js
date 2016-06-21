@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt-nodejs');
 const flash = require('connect-flash');
 const LocalStrategy = require('passport-local').Strategy;
 
-module.exports.passport = (app) => {
+module.exports = (app) => {
   app.use(expressSession({ secret: 'keyboard cat' }));
   app.use(passport.initialize());
   app.use(passport.session());
