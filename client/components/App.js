@@ -4,7 +4,7 @@ import SignIn from './SignIn.js';
 function App() {
   return (
     <div>
-      <SignIn />
+      <h1>Hello world</h1>
     </div>
   );
 }
