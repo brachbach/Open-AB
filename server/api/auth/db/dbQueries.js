@@ -13,9 +13,8 @@ exports.checkEmail = (clientEmail, cb) => {
 
 // get all results in DB
 exports.createClient = (clientEmail, password, cb) => {
-  console.log('in create client');
-  exports.checkEmail(clientEmail, (emailExists) => {
-    console.log('creating client');
+  exports.checkEmail(clientEmail, (err, response) => {
+    const emailExists = response.rows[0].exists;
     if (emailExists) {
       cb(null, false);
     } else {

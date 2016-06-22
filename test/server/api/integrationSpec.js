@@ -4,11 +4,9 @@ const authController = require('../../../server/api/auth/controller.js');
 const authDbQueries = require('../../../server/api/auth/db/dbQueries.js');
 const db = require('../../../server/api/auth/db/dbConnection.js');
 
-// also want to build: making sure auth checks are working for signed in and not-signed-in users
-
 describe('Signup:', () => {
-  
-  beforeEach((done) => {
+
+  before((done) => {
     db.query('DELETE FROM clients', (err, result) => {
       if (err) {
         console.error(err);
@@ -17,27 +15,37 @@ describe('Signup:', () => {
     });
   });
 
-  it('signs up user, saves their info in the database, and redirects them to the dashboard', (done) => {
+  it('signs up user and redirects them to the dashboard', done => {
     const body = { email: 'test@gmail.com', password: 'abc123' };
     request
       .post('/api/signup')
       .send(body)
       .expect('Location', '/dashboard', done);
+  });
 
-    authDbQueries.checkEmail('test@gmail.com', (err, result) => {
+  it('saves user info to the database on signup', done => {
+     authDbQueries.checkEmail('test@gmail.com', (err, result) => {
       if (err) {
         console.error(err);
       }
       expect(result.rows.length).to.equal(1);
+      done();
     });
   });
 
+  it('rejects user with email already in database and redirects them to failure route', done => {
+    const body = { email: 'test@gmail.com', password: 'abc123' };
+    request
+      .post('/api/signup')
+      .send(body)
+      .expect('Location', '/failure', done);
+  });
   // add email validation/password validation and test it
 });
 
-describe('Signin:', function() {
+describe('Signin:', () => {
 
-  beforeEach((done) => {
+  before((done) => {
     db.query('DELETE FROM clients', (err, result) => {
       if (err) {
         console.error(err);
@@ -53,7 +61,7 @@ describe('Signin:', function() {
     });
   });
 
-  it('signs in user with valid username and password and redirects them to dashboard', (done) => {  // not yet actually testing for redirect
+  it('signs in user with valid username and password and redirects them to dashboard', done => {
     const body = { email: 'test2@gmail.com', password: 'abcd123' };
     request
       .post('/api/signin')
@@ -61,7 +69,7 @@ describe('Signin:', function() {
       .expect('Location', '/dashboard', done);
   });
 
-  it('rejects user with invalid username and redirects them to failure route', (done) => {  //after I get this working,do one for password as well 
+  it('rejects user with invalid username and redirects them to failure route', done => {
     const body = { email: 'wrong@gmail.com', password: 'abcd123' };
     request
       .post('/api/signin')
@@ -69,7 +77,7 @@ describe('Signin:', function() {
       .expect('Location', '/failure', done);
   });
 
-  it('rejects user with invalid password and redirects them to failure route', (done) => {  //after I get this working,do one for password as well 
+  it('rejects user with invalid password and redirects them to failure route', done => {
     const body = { email: 'test2@gmail.com', password: 'wrong' };
     request
       .post('/api/signin')
