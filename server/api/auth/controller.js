@@ -20,7 +20,7 @@ exports.signup = (req, res, next) => {  // maybe refactor so that I'm only peeli
       if (error) { return next(error); }
       // console.log('user to login with after signup:', user);
       // console.log('logged in and redirecting');
-      return res.redirect('/success');
+      return res.redirect('/dashboard');
     });
   });
 };
