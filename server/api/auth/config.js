@@ -22,10 +22,10 @@ module.exports = (app) => {
         if (err) { return done(err); } // error code 500
         if (!result) {
           console.log('User does not exist');
-          return done(null, false, { message: 'Incorrect email.' });  // still need to test this erroring
+          return done(null, false, { message: 'Incorrect email.' });
         }
-        let user = result.rows[0];
-        if (!bcrypt.compareSync(password, user.password)) {  // still need to test this erroring
+        const user = result.rows[0];
+        if (!bcrypt.compareSync(password, user.password)) {
           console.log('Incorrect password');
           return done(null, false, { message: 'Incorrect password.' });
         }

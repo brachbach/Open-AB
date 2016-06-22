@@ -1,11 +1,9 @@
 const expect = require('chai').expect;
 const request = require('supertest')('http://localhost:8080'); // can and probably should factor out app.js and use that instead
-const authController = require('../../../server/api/auth/controller.js');
 const authDbQueries = require('../../../server/api/auth/db/dbQueries.js');
 const db = require('../../../server/api/auth/db/dbConnection.js');
 
 describe('Signup:', () => {
-
   before((done) => {
     db.query('DELETE FROM clients', (err, result) => {
       if (err) {
@@ -24,7 +22,7 @@ describe('Signup:', () => {
   });
 
   it('saves user info to the database on signup', done => {
-     authDbQueries.checkEmail('test@gmail.com', (err, result) => {
+    authDbQueries.checkEmail('test@gmail.com', (err, result) => {
       if (err) {
         console.error(err);
       }
@@ -33,26 +31,23 @@ describe('Signup:', () => {
     });
   });
 
-  it('rejects user with email already in database and redirects them to failure route', done => {
+  it('rejects signup if email already in database', done => {
     const body = { email: 'test@gmail.com', password: 'abc123' };
     request
       .post('/api/signup')
       .send(body)
-      .expect('Location', '/failure', done);
+      .expect(400, done);
   });
   // add email validation/password validation and test it
 });
 
 describe('Signin:', () => {
-
   before((done) => {
-    db.query('DELETE FROM clients', (err, result) => {
+    db.query('DELETE FROM clients', (err) => {
       if (err) {
         console.error(err);
       }
-      console.log('about to create client');
-      authDbQueries.createClient('test2@gmail.com', 'abcd123', (error, res) => {
-        console.log('back in test file');
+      authDbQueries.createClient('test2@gmail.com', 'abcd123', (error) => {
         if (error) {
           console.error(error);
         }

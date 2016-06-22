@@ -1,19 +1,19 @@
 const passport = require('passport');
 const dbQry = require('./db/dbQueries');
 
-exports.signin = passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/failure', failureFlash: true }); // could simply put in the function to deal w/ errors here, I think 
+exports.signin = passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/failure', failureFlash: true }); // TODO: finish implementing flash here
 
 exports.signup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  dbQry.createClient(email, password, (err, response) => {  // ought to validate email and password here
+  dbQry.createClient(email, password, (err, response) => {  // TODO: validate email and password here
     if (err) {
       return next(err); // error code 500
     }
     if (response === false) {
-      return res.redirect('/failure');
+      return res.status(400).json({ message: 'User with this email address already exists' });
     }
-    return req.login(response, (error) => {  // I expect this to error properly
+    return req.login(response, (error) => {
       if (error) { return next(error); }
       return res.redirect('/dashboard');
     });
