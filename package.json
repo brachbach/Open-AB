@@ -9,7 +9,7 @@
     "lint": "eslint --fix client server test",
     "test:client": "karma start",
     "test:backend": "npm run test:api-db && npm run test:lstn-db && npm run test:listening && npm run test:server",
-    "test:api-db": "mocha --bail test/server/api/dbQueriesSpec.js",
+    "test:api-db": "mocha --bail test/server/api/dbQueriesSpec.js && mocha --bail test/server/api/statsSpec.js",
     "test:lstn-db": "mocha --bail test/server/listening/dbQueriesSpec.js",
     "test:listening": "NODE_ENV=test PORT=9999 node server/listening/index.js & mocha --bail test/server/listening/integrationSpec.js; pkill -n node;",
     "test:server": "NODE_ENV=test PORT=8888 node server/api/index.js & mocha --bail test/server/api/integrationSpec.js; pkill -n node;",

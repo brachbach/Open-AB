@@ -16,9 +16,9 @@ const app = express();
 const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || 8080;
 
-const compiler = webpack(config);
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
-app.use(webpackHotMiddleware(compiler));
+// const compiler = webpack(config);
+// app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+// app.use(webpackHotMiddleware(compiler));
 app.use(express.static(`${__dirname}/../../client`));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

@@ -1,10 +1,16 @@
 const generateEvents = require('./generateEvents');
 const _ = require('lodash');
 
+const sampleSize = 2587;
 const dbQry = {};
 
-dbQry.getAllResults = (cb) => {   // dummy version
 
+dbQry.getAllResults = (cb) => {   // dummy version
+  const tests = generateEvents.generateTimesForMultipleTests();
+  const result = {};
+  result.rows = tests;
+  // console.log(result.rows[0]);
+  cb(null, result);
 };
 
 exports.getStats = getStats = (req, res, next) => {
@@ -13,21 +19,21 @@ exports.getStats = getStats = (req, res, next) => {
       return next(error);
     }
     const testResults = result.rows;
-    let statsArray = testResults.map((row) => {
-      console.log(row);
-      let stats = {
+    const statsArray = testResults.map((row) => {
+      const stats = {
         aVisits: row.aVisits.length,
         aClicks: row.aClicks.length,
-        bVisits: row.aVisits.length,
-        bClicks: row.aClicks.length,
+        bVisits: row.bVisits.length,
+        bClicks: row.bClicks.length,
       };
-      // if stats.(aVisits >)
+      // console.log(stats);
+      if (row.aVisits.length >= sampleSize && row.bVisits.length >= sampleSize) {
+        const cutoffTime = row.aVisits[sampleSize - 1];
+        
+      }
+
       // stats.p = testSignificance(stats.aVisits, stats.aClicks, stats.bVisits, stats.bClicks,);
       return stats;
     });
-    console.log(stats);
   });
 };
-
-getStats();
-
