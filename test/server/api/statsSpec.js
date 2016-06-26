@@ -8,19 +8,20 @@ const generateEvents = require('../../../server/api/analytics/stats/generateEven
 const chiSquareAnalysis = require('../../../server/api/analytics/stats/chiSquareAnalysis.js');
 
 describe('Events generator', () => {
-// must change these params if they are changed for the default test generator in the file being tested
-  const startTime = 1466896596001;
+// must change these params if they are changed in the function being tested
   const aClickRate = 0.1;
   const aTotalVisits = 4567;
-  const bClickRate = 0.125;
+  const bClickRate = 0.17;
   const bTotalVisits = 4603;
-  const timeframe = 2592000000;
+  const test1ATotalVisits = 2890;
 
   describe('Generate full tests data', () => {
 
     const tests = generateEvents.generateMultipleTestsWithDefaultParams();
     const test = tests[0];
     const testData = test.testData;
+    const test1 = tests[1];
+    const test1Data = test1.testData;
 
     it('should produce tests with the correct name and id', () => {
       expect(test.testName).to.equal('buyNowButtonTest');
@@ -28,13 +29,14 @@ describe('Events generator', () => {
     });
 
     it('should generate the right number of visits', () => {
-      expect(testData.aVisits.length).to.equal(4567);
-      expect(testData.bVisits.length).to.equal(4603);
+      expect(testData.aVisits.length).to.equal(aTotalVisits);
+      expect(testData.bVisits.length).to.equal(bTotalVisits);
+      expect(test1Data.aVisits.length).to.equal(test1ATotalVisits);
     });
 
     it('should probably generate a number of clicks within a certain range', () => {
       expect(testData.aClicks.length).to.be.within(((aClickRate - 0.25) * aTotalVisits), ((aClickRate + 0.25) * aTotalVisits));
-      expect(testData.bClicks.length).to.be.within(((bClickRate - 0.25) * bTotalVisits), ((bClickRate + 0.25) * bTotalVisits));  
+      expect(testData.bClicks.length).to.be.within(((bClickRate - 0.25) * bTotalVisits), ((bClickRate + 0.25) * bTotalVisits));
     });
 
     it('should generate visits of the correct format', () => {
@@ -49,7 +51,7 @@ describe('Events generator', () => {
   });
 
   describe('Generate click and visit times arrays', () => {
-    
+
     const tests = generateEvents.generateTimesForMultipleTests();
     const test = tests[0];
 

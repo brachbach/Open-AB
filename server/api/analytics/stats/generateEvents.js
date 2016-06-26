@@ -33,11 +33,11 @@ const generate = (startTime, aClickRate, aTotalVisits, bClickRate, bTotalVisits,
   };
 };
 
-const generateWithDefaultParams = () => {
+exports.generateWithDefaultParams = () => {
   const startTime = 1466896596001;
   const aClickRate = 0.1;
   const aTotalVisits = 4567;
-  const bClickRate = 0.125;
+  const bClickRate = 0.17;
   const bTotalVisits = 4603;
   const timeframe = 2592000000;
 
@@ -46,7 +46,8 @@ const generateWithDefaultParams = () => {
 
 const generateDataForMultipleTests = (testsInfo) => {
   return testsInfo.map(testInfo => {
-    const testData = generateWithDefaultParams();
+    const { startTime, aClickRate, aTotalVisits, bClickRate, bTotalVisits, timeframe } = testInfo.testParams;
+    const testData = generate(startTime, aClickRate, aTotalVisits, bClickRate, bTotalVisits, timeframe);
     return {
       testName: testInfo.testName,
       testId: testInfo.testId,
@@ -55,7 +56,7 @@ const generateDataForMultipleTests = (testsInfo) => {
   });
 };
 
-// enerateMultipleTestsWithDefaultParams produces data of the form:
+// generateMultipleTestsWithDefaultParams produces data of the form:
 // [
 //   {
 //     testName: 'buyNowButtonTest',
@@ -80,16 +81,64 @@ const generateDataForMultipleTests = (testsInfo) => {
 exports.generateMultipleTestsWithDefaultParams = generateMultipleTestsWithDefaultParams = () => {
   const testsInfo = [
     {
-      testName: 'buyNowButtonTest',
+      testName: 'buyNowButtonTest', // B wins
       testId: '3874E76',
+      testParams: {
+        startTime: 1450896596001, // Wed Dec 23 2015 10:49:56 GMT-0800 (PST)
+        aClickRate: 0.1,
+        aTotalVisits: 4567,
+        bClickRate: 0.2,
+        bTotalVisits: 4603,
+        timeframe: 2592000000, // ~30 days: days * hours * minutes * seconds * milliseconds = 30 * 24 * 60 * 60 * 1000
+      },
     },
     {
-      testName: 'subscribeNowButtonTest',
-      testId: 'sd37489',
-    },
-    {
-      testName: 'tryNowButtonTest',
+      testName: 'tryNowButtonTest', // A wins
       testId: 'hgU9084K',
+      testParams: {
+        startTime: 1455896596001, //Fri Feb 19 2016 07:43:16 GMT-0800 (PST) 
+        aClickRate: 0.5,
+        aTotalVisits: 2890,
+        bClickRate: 0.3,
+        bTotalVisits: 2921,
+        timeframe: 864000000, // ~10 days
+      },
+    },
+    {
+      testName: 'subscribeNowButtonTest', // Usually inconclusive (with the occasional false positive either way)
+      testId: 'sd37489',
+      testParams: {
+        startTime: 1457896596001, // Sun Mar 13 2016 12:16:36 GMT-0700 (PDT) 
+        aClickRate: 0.2,
+        aTotalVisits: 3876,
+        bClickRate: 0.2,
+        bTotalVisits: 3843,
+        timeframe: 964000000, // ~11 days
+      },
+    },
+    {
+      testName: 'actNowButtonTest', // Not yet enough clicks to declare a winner
+      testId: 'asdas5489',
+      testParams: {
+        startTime: 1458896596001, // Fri Mar 25 2016 02:03:16 GMT-0700 (PDT) 
+        aClickRate: 0.1,
+        aTotalVisits: 2590,
+        bClickRate: 0.3,
+        bTotalVisits: 2580,
+        timeframe: 764000000, // ~9 days
+      },
+    },
+    {
+      testName: 'signupNowButtonTest', // Hasn't run long enough to declare a winner
+      testId: 'kjhghj876H',
+      testParams: {
+        startTime: 1459996596001, //Wed Apr 06 2016 19:36:36 GMT-0700 (PDT) 
+        aClickRate: 0.2,
+        aTotalVisits: 3876,
+        bClickRate: 0.4,
+        bTotalVisits: 3843,
+        timeframe: 86400000, // ~1 day
+      },
     },
   ];
   return generateDataForMultipleTests(testsInfo);
@@ -129,5 +178,3 @@ exports.generateTimesForMultipleTests = () => {
     };
   });
 };
-
-// days * hours * minutes * seconds * milliseconds = 30 * 24 * 60 * 60 * 1000
