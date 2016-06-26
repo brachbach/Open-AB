@@ -1,10 +1,20 @@
-exports.getStats = (req, res, next) => {
+const generateEvents = require('./generateEvents');
+const _ = require('lodash');
+
+const dbQry = {};
+
+dbQry.getAllResults = (cb) => {   // dummy version
+
+};
+
+exports.getStats = getStats = (req, res, next) => {
   dbQry.getAllResults((error, result) => {
     if (error) {
       return next(error);
     }
     const testResults = result.rows;
     let statsArray = testResults.map((row) => {
+      console.log(row);
       let stats = {
         aVisits: row.aVisits.length,
         aClicks: row.aClicks.length,
@@ -17,6 +27,7 @@ exports.getStats = (req, res, next) => {
     });
     console.log(stats);
   });
-}
+};
 
+getStats();
 
