@@ -5,15 +5,14 @@ const expect = require('chai').expect;
 process.env.NODE_ENV = 'test';
 
 const generateEvents = require('../../../server/api/analytics/stats/generateEvents.js');
-const chiSquareAnalysis = require('../../../server/api/analytics/stats/chiSquareAnalysis.js');
+// const chiSquareAnalysis = require('../../../server/api/analytics/stats/chiSquareAnalysis.js');
+
+const testsInfo = generateEvents.testsInfo;
+const { aClickRate, aTotalVisits, bClickRate, bTotalVisits } = testsInfo[0].testParams;
 
 describe('Events generator', () => {
-// must change these params if they are changed in the function being tested
-  const aClickRate = 0.1;
-  const aTotalVisits = 4567;
-  const bClickRate = 0.17;
-  const bTotalVisits = 4603;
-  const test1ATotalVisits = 2890;
+  
+  const test1ATotalVisits = generateEvents.testsInfo[1].testParams.aTotalVisits;
 
   describe('Generate full tests data', () => {
 
@@ -65,7 +64,31 @@ describe('Events generator', () => {
   });
 });
 
-describe('Perform Chi Square Significance Analysis', () => {
+// describe('Perform Chi Square Significance Analysis', () => {
 
-  const results = chiSquareAnalysis.getStats();
-});
+//   // Note that if the test data is changed, some of these tests will break.
+//   // This is intentional and ensures that appropriate test data is used.
+
+//   const results = chiSquareAnalysis.getStats();
+
+//   it('should determine whether sufficient time has elapsed', () => {
+//     expect(results[0].sufficientTime).to.be(true);
+//     expect(results[4].sufficientTime).to.be(false);
+//   });
+
+//   it('should determine whether enough users have visited', () => {
+//     expect(results[0].sufficientVisits).to.be(true);
+//     expect(results[3].sufficientVisits).to.be(false);
+//   });
+
+//   it('should probably consider a reasonable number of clicks', () => {
+//     expect(results[0].stats.aClicksConsidered).to.be.within(((aClickRate - 0.30) * 2600), ((aClickRate + 0.30) * 2600));
+//     expect(results[0].stats.bClicksConsidered).to.be.within(((bClickRate - 0.30) * 2600), ((bClickRate + 0.30) * 2600));
+//   });
+
+//   it('should probably find a reasonable p value (note: this test will fail about 1% of the time due to randomness!', () => {
+//     expect(results[0].stats.p).to.be.within(0, 0.05);
+//     expect(results[2].stats.p).to.be.within(0.01, 1);
+//   });
+
+// });
