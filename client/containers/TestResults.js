@@ -4,7 +4,7 @@ import { fetchDataIfNeeded } from '../actions/api';
 import uuid from 'uuid';
 
 import formatStats from '../formatStats.js';
-import StatsForTest from '../components/statsForTest';
+import StatsForTest from '../components/StatsForTest.js';
 
 
 const statsEndpoint = '/api/stats';
@@ -28,11 +28,9 @@ class TestResults extends Component {
 
     const allViewableStats = formatStats(data);
 
-    console.log('viewableStats', allViewableStats);
-
     return (
       <div>
-        {allViewableStats.map(viewableStatsForTest => <StatsForTest viewableStatsForTest={viewableStatsForTest} />)}
+        {allViewableStats.map(viewableStatsForTest => <StatsForTest key={uuid.v4()} viewableStatsForTest={viewableStatsForTest} />)}
       </div>
     );
   }
