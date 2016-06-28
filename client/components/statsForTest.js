@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
+import uuid from 'uuid';
 
-function statsForTest() {
+function StatsForTest(props) {
   return (
     <div>
-      {this.props.data}
+      <div>
+        <p>Test result: {props.viewableStatsForTest.testResult}</p>
+        <p>Version A conversion rate: {props.viewableStatsForTest.aConversionRate}</p>
+        <p>Version B conversion rate: {props.viewableStatsForTest.bConversionRate}</p>
+      </div>
     </div>
   );
 }
 
-TestResults.propTypes = {
-  data: PropTypes.array.isRequired,
+StatsForTest.propTypes = {
+  viewableStatsForTest: PropTypes.array.isRequired,
 };
 
-
-export default statsForTest;
+export default StatsForTest;

@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { fetchDataIfNeeded } from '../actions/api';
 import uuid from 'uuid';
 
+import formatStats from '../formatStats.js';
+import StatsForTest from '../components/statsForTest';
+
+
 const statsEndpoint = '/api/stats';
 
 class TestResults extends Component {
@@ -21,15 +25,14 @@ class TestResults extends Component {
 
   render() {
     const { data, isFetching, lastUpdated } = this.props;
+
+    const allViewableStats = formatStats(data);
+
+    console.log('viewableStats', allViewableStats);
+
     return (
       <div>
-        {this.props.data.map((data) =>
-          <ul>
-            <li key={uuid.v4()}>{data.testName}</li>
-            <li key={uuid.v4()}>{data.testId}</li>
-            <li key={uuid.v4()}>{data.testClicks}</li>
-          </ul>
-        )}
+        {allViewableStats.map(viewableStatsForTest => <StatsForTest viewableStatsForTest={viewableStatsForTest} />)}
       </div>
     );
   }
@@ -63,4 +66,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(TestResults);
-
