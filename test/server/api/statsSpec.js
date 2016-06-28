@@ -75,35 +75,35 @@ describe('Chi Square Significance Analysis', () => {
   const approxEvents = 2587 * 1.01;
 
   const tests = generateEvents.generateTimesForMultipleTestsWithDefaultParams();
-  const results = chiSquareAnalysis.computeStatsForTests(tests);
+  const results = chiSquareAnalysis.computeStatsForAllTests(tests);
 
   it('should determine whether sufficient time has elapsed', () => {
-    expect(results[0].stats.sufficientTime).to.be.true;
-    expect(results[4].stats.sufficientTime).to.be.false;
+    expect(results[0].analysisResults.sufficientTime).to.be.true;
+    expect(results[4].analysisResults.sufficientTime).to.be.false;
   });
 
   it('should determine whether enough users have visited', () => {
-    expect(results[0].stats.sufficientVisits).to.be.true;
-    expect(results[3].stats.sufficientVisits).to.be.false;
+    expect(results[0].analysisResults.sufficientVisits).to.be.true;
+    expect(results[3].analysisResults.sufficientVisits).to.be.false;
   });
 
   it('should probably consider a reasonable number of visits', () => {
-    expect(results[0].stats.testResults.aVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
-    expect(results[0].stats.testResults.bVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
-    expect(results[1].stats.testResults.aVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
-    expect(results[1].stats.testResults.bVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
-    expect(results[2].stats.testResults.aVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
-    expect(results[2].stats.testResults.bVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
+    expect(results[0].analysisResults.eventsConsidered.aVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
+    expect(results[0].analysisResults.eventsConsidered.bVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
+    expect(results[1].analysisResults.eventsConsidered.aVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
+    expect(results[1].analysisResults.eventsConsidered.bVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
+    expect(results[2].analysisResults.eventsConsidered.aVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
+    expect(results[2].analysisResults.eventsConsidered.bVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
   });
 
   it('should probably consider a reasonable number of clicks', () => {
-    expect(results[0].stats.testResults.aClicksConsidered).to.be.within(((aClickRate - 0.30) * approxEvents), ((aClickRate + 0.30) * approxEvents));
-    expect(results[0].stats.testResults.bClicksConsidered).to.be.within(((bClickRate - 0.30) * approxEvents), ((bClickRate + 0.30) * approxEvents));
+    expect(results[0].analysisResults.eventsConsidered.aClicksConsidered).to.be.within(((aClickRate - 0.30) * approxEvents), ((aClickRate + 0.30) * approxEvents));
+    expect(results[0].analysisResults.eventsConsidered.bClicksConsidered).to.be.within(((bClickRate - 0.30) * approxEvents), ((bClickRate + 0.30) * approxEvents));
   });
 
   it('should probably find a reasonable p value', () => {
-    expect(results[0].stats.testResults.p).to.be.within(0, 0.05);
-    expect(results[2].stats.testResults.p).to.be.within(0, 1);
+    expect(results[0].analysisResults.p).to.be.within(0, 0.05);
+    expect(results[2].analysisResults.p).to.be.within(0, 1);
   });
 });
 
