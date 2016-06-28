@@ -26,7 +26,7 @@ const countEventsToConsider = (data, cutoffTime) => {
   }, {});
 };
 
-const computeStatsForCompleteTest = (data) => {
+const computeStatsForCompletedTest = (data) => {
   const visitsCutoffTime = Math.max(data.aVisits[sampleSize - 1], data.bVisits[sampleSize - 1]);
   const cutoffTime = visitsCutoffTime + extraClickTime;
   const stats = countEventsToConsider(data, cutoffTime);
@@ -34,13 +34,13 @@ const computeStatsForCompleteTest = (data) => {
   return stats;
 };
 
-exports.computeStatsForTest = computeStatsForTest = test => {
+exports.computeStatsForSingleTest = computeStatsForSingleTest = test => {
   const { testName, testId, data } = test;
   const sufficientTime = (data.aVisits[data.aVisits.length - 1] - data.aVisits[0]) > 604800000; // is there data across a span of at least 7 days?
   const sufficientVisits = (data.aVisits.length >= sampleSize) && (data.bVisits.length >= sampleSize);
   let testResults;
   if (sufficientVisits) {
-    testResults = computeStatsForCompleteTest(data);
+    testResults = computeStatsForCompletedTest(data);
   } else {
     testResults = Object.keys(data).reduce((statsAccumulator, eventName) => {
       statsAccumulator[`${eventName}Considered`] = data[eventName].length;
@@ -69,4 +69,4 @@ exports.computeStatsForTest = computeStatsForTest = test => {
 //   {...},
 // ]
 
-exports.computeStatsForTests = tests => tests.map(test => computeStatsForTest(test));
+exports.computeStatsForTests = tests => tests.map(test => computeStatsForSingleTest(test));
