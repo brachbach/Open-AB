@@ -42,7 +42,7 @@ exports.getAllStats = (req, res, next) => { // use dbQry as an arg for testing p
       return next(error);
     }
     const testResults = result.rows;
-    const testStats = chiSquareAnalysis.computeStatsForTests(testResults);
+    const testStats = chiSquareAnalysis.computeStatsForAllTests(testResults);
     res.status(200).json(testStats);
   });
 };
