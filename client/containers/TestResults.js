@@ -24,9 +24,8 @@ class TestResults extends Component {
   }
 
   render() {
-    const { data, isFetching, lastUpdated } = this.props;
-
-    const viewableStatsForAllTests = formatStats(data);
+    const { stats } = this.props;
+    const viewableStatsForAllTests = formatStats(stats);
 
     return (
       <div>
@@ -38,7 +37,7 @@ class TestResults extends Component {
 
 TestResults.propTypes = {
   statsEndpoint: PropTypes.string.isRequired,
-  data: PropTypes.array.isRequired,
+  stats: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   lastUpdated: PropTypes.number,
   dispatch: PropTypes.func.isRequired,
@@ -49,7 +48,7 @@ function mapStateToProps(state) {
   const {
     isFetching,
     lastUpdated,
-    items: data,
+    items: stats,
   } = dataByapiEndpoint[statsEndpoint] || {
     isFetching: true,
     items: [],
@@ -57,7 +56,7 @@ function mapStateToProps(state) {
 
   return {
     statsEndpoint,
-    data,
+    stats,
     isFetching,
     lastUpdated,
   };

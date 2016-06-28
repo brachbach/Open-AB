@@ -4,6 +4,8 @@ import formatStats from '../../client/formatStats.js';
 // import generateEvents from '../../server/api/analytics/stats/generateEvents.js';
 // import chiSquareAnalysis from '../../server/api/analytics/stats/chiSquareAnalysis.js';
 
+/*eslint-disable */
+
 const statsForAllTests = [
   {
     "testName": "Buy Now Button Test",
@@ -80,6 +82,8 @@ const statsForAllTests = [
     }
   }
 ]
+
+/*eslint-enable */
 
 describe('Format stats', () => {
 

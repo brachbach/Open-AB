@@ -7,7 +7,6 @@ const formatProportion = (a, b) => {
 
 module.exports = statsForAllTests => {
   return statsForAllTests.map(statsForTest => {
-
     const { testName, testId, analysisResults } = statsForTest;
     const { sufficientTime, sufficientVisits, eventsConsidered, p } = analysisResults;
     const aConversionRateNumber = formatProportion(eventsConsidered.aClicksConsidered, eventsConsidered.aVisitsConsidered);
