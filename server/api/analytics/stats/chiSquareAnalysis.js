@@ -52,7 +52,7 @@ exports.computeStatsForSingleTest = computeStatsForSingleTest = test => {
   return { testName, testId, analysisResults };
 };
 
-// computeStatsForTests returns data of the form: [{
+// computeStatsForAllTests returns data of the form: [{
 //     testName: ‘buyNowButtonTest’,
 //     testId: ‘a3D5L97’,
 //     analysisResults: {

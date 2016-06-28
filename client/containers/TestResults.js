@@ -26,11 +26,11 @@ class TestResults extends Component {
   render() {
     const { data, isFetching, lastUpdated } = this.props;
 
-    const allViewableStats = formatStats(data);
+    const viewableStatsForAllTests = formatStats(data);
 
     return (
       <div>
-        {allViewableStats.map(viewableStatsForTest => <StatsForTest key={uuid.v4()} viewableStatsForTest={viewableStatsForTest} />)}
+        {viewableStatsForAllTests.map(viewableStatsForTest => <StatsForTest key={uuid.v4()} viewableStatsForTest={viewableStatsForTest} />)}
       </div>
     );
   }

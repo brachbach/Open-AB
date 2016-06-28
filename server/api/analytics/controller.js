@@ -30,7 +30,7 @@ exports.createTest = (req, res, next) => {
 };
 
 dbQry.getAllResults = (cb) => {   // dummy version
-  const tests = generateEvents.generateTimesForMultipleTests();
+  const tests = generateEvents.generateTimesForMultipleTestsWithDefaultParams();
   const result = {};
   result.rows = tests;
   cb(null, result);
