@@ -1,5 +1,4 @@
-import React, { PropTypes, Component } from 'react';
-import uuid from 'uuid';
+import React, { PropTypes } from 'react';
 
 function StatsForTest(props) {
   return (
