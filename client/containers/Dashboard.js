@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchDataIfNeeded, invalidateApiEndpoint } from '../actions/api';
 import TestResults from '../components/TestResults';
 
-const apiEndpoint = '/api/results';
+const statsEndpoint = '/api/stats';
 
 class Dashboard extends Component {
   constructor(props) {

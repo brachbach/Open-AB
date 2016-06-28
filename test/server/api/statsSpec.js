@@ -87,6 +87,15 @@ describe('Chi Square Significance Analysis', () => {
     expect(results[3].stats.sufficientVisits).to.be.false;
   });
 
+  it('should probably consider a reasonable number of visits', () => {
+    expect(results[0].stats.testResults.aVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
+    expect(results[0].stats.testResults.bVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
+    expect(results[1].stats.testResults.aVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
+    expect(results[1].stats.testResults.bVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
+    expect(results[2].stats.testResults.aVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
+    expect(results[2].stats.testResults.bVisitsConsidered).to.be.within(sampleSize, sampleSize * 1.2);
+  });
+
   it('should probably consider a reasonable number of clicks', () => {
     expect(results[0].stats.testResults.aClicksConsidered).to.be.within(((aClickRate - 0.30) * approxEvents), ((aClickRate + 0.30) * approxEvents));
     expect(results[0].stats.testResults.bClicksConsidered).to.be.within(((bClickRate - 0.30) * approxEvents), ((bClickRate + 0.30) * approxEvents));

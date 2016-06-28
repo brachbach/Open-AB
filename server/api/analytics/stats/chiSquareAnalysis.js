@@ -27,7 +27,7 @@ const countEventsToConsider = (data, cutoffTime) => {
 };
 
 const computeStatsForCompleteTest = (data) => {
-  const visitsCutoffTime = Math.max(data.aVisits[sampleSize - 1], data.aVisits[sampleSize - 1]);
+  const visitsCutoffTime = Math.max(data.aVisits[sampleSize - 1], data.bVisits[sampleSize - 1]);
   const cutoffTime = visitsCutoffTime + extraClickTime;
   const stats = countEventsToConsider(data, cutoffTime);
   stats.p = chiSquareTest(stats.aVisitsConsidered, stats.aClicksConsidered, stats.bVisitsConsidered, stats.bClicksConsidered);
