@@ -64,6 +64,7 @@
     "redux-logger": "^2.4.0"
   },
   "dependencies": {
+    "async": "^2.0.0-rc.6",
     "babel-cli": "^6.9.0",
     "babel-polyfill": "^6.3.14",
     "bcrypt-nodejs": "0.0.3",

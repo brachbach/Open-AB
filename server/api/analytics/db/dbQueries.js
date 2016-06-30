@@ -10,7 +10,7 @@ exports.getAllResults = (cb) => {
     .then(tests => {
       // console.log('tests:', tests);
       results = [];
-      counter = 0
+      counter = 0;
       return tests.forEach(test => {
         dbpgp.query('select * from visits where version_id = (select id from versions where ab = $1 and test_id = $2)', ['a', test.id])
         .then(response => {

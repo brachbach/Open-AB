@@ -1,34 +1,31 @@
 const dbQry = require('./db/dbQueries');
-const generateEvents = require('../../api/analytics/stats/generateEvents.js');
+const async = require('async');
 
-const clientData = [
+const generateEvents = require('../../api/analytics/stats/generateEvents.js');
+const clientData = require('../../api/clientData.js');
+
+const clientHardcodedData = [
   {
     email: 'abcd@abcd.com',
     password: 'qwerasdfzxcv1234',
     pages: [
       {
         pageName: 'Homepage',
-        pageTests: generateEvents.generateDataForMultipleTestsWithDefaultParams(),
       },
     ],
   },
 ];
 
-data.forEach(client => {
-  // add client
+const client = clientHardcodedData[0];
+const page = client.pages[0];
+
+const insertClientHardcodedData = cb => {
   dbQry.insertClient(client.email, client.password, () => {
-    // add pages
-    client.pages.forEach(page => {
-      dbQry.insertPage(page.pageName, datum.email, () => {
-        // add test for page
-        datum.tests.forEach(test => {
-          if (test.page === pageName) {
-            dbQry.addFilledTest(test.name, test.result_a, test.result_b, pageName, datum.email, () => {
-              console.log('DONE WITH ', datum.email);
-            });
-          }
-        });
-      });
+    dbQry.insertPage(page.pageName, client.email, () => {
+      cb();
     });
   });
-});
+};
+
+insertClientHardcodedData(() => 'success');
+

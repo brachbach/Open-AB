@@ -1,51 +1,64 @@
-// Seed data for a single client for a single page, corresponds to events data generated in generateEvents.js
+// Seed data for a single client for a single page
 
-    {
-      testName: 'test1',
-      pageId: 1,
-      a: {
-        url: 'http://mysite.com/a',
-        DOMLocation: '0-1-3-0-1-0',
-      },
-      b: {
-        url: 'http://mysite.com/b',
-        DOMLocation: '0-1-3-3-6-5',
-      },
+module.exports = [
+  {
+    testName: 'Buy-Now Button Test',
+    pageId: 1,
+    a: {
+      url: 'http://mysite.com/buya',
+      DOMLocation: '1-1-10',
     },
-    {
-      testName: 'test2',
-      pageId: 1,
-      a: {
-        url: 'http://yoursite.com/a',
-        DOMLocation: '24-7-365',
-      },
-      b: {
-        url: 'http://yoursite.com/b',
-        DOMLocation: '1-2-3-4-5',
-      },
+    b: {
+      url: 'http://mysite.com/buyb',
+      DOMLocation: '1-2-10',
     },
-    {
-      testName: 'test3',
-      pageId: 2,
-      a: {
-        url: 'http://theirsite.com/a',
-        DOMLocation: '1-1-1-1-1-1',
-      },
-      b: {
-        url: 'http://theirsite.com/b',
-        DOMLocation: '2-2-2-2-2-2',
-      },
+  },
+  {
+    testName: 'Try-Now Button Test',
+    pageId: 1,
+    a: {
+      url: 'http://mysite.com/trya',
+      DOMLocation: '2-1-10',
     },
-    {
-      testName: 'test4',
-      pageId: 2,
-      a: {
-        url: 'http://oursite.com/a',
-        DOMLocation: '3-3-3-3-3',
-      },
-      b: {
-        url: 'http://oursite.com/b',
-        DOMLocation: '4-4-4-4-4',
-      },
+    b: {
+      url: 'http://mysite.com/tryb',
+      DOMLocation: '2-2-10',
     },
-  ];
+  },
+  {
+    testName: 'Subscribe-Now Button Test',
+    pageId: 1,
+    a: {
+      url: 'http://mysite.com/subscribea',
+      DOMLocation: '3-1-10',
+    },
+    b: {
+      url: 'http://mysite.com/subscribeb',
+      DOMLocation: '3-2-10',
+    },
+  },
+  {
+    testName: 'Act-Now Button Test',
+    pageId: 1,
+    a: {
+      url: 'http://mysite.com/acta',
+      DOMLocation: '4-1-10',
+    },
+    b: {
+      url: 'http://mysite.com/actb',
+      DOMLocation: '4-2-10',
+    },
+  },
+  {
+    testName: 'Signup-Now Button Test',
+    pageId: 1,
+    a: {
+      url: 'http://mysite.com/signupa',
+      DOMLocation: '5-1-10',
+    },
+    b: {
+      url: 'http://mysite.com/signupb',
+      DOMLocation: '5-2-10',
+    },
+  },
+];
