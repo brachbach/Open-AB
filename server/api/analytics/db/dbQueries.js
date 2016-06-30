@@ -8,17 +8,40 @@ exports.getAllResults = (cb) => {
 
   dbpgp.query("select * from tests")
     .then(tests => {
-      // console.log('tests:', tests);
-      results = [];
+      allResults = [];
       counter = 0;
       return tests.forEach(test => {
-        dbpgp.query('select * from visits where version_id = (select id from versions where ab = $1 and test_id = $2)', ['a', test.id])
-        .then(response => {
-          results.push([test, response]);
+        dbpgp.task(t1 => {
+          return t1.batch([
+            t1.query('select * from visits where version_id = (select id from versions where ab = $1 and test_id = $2)', ['a', test.id]),
+            t1.query('select * from clicks where version_id = (select id from versions where ab = $1 and test_id = $2)', ['a', test.id]),
+            t1.query('select * from visits where version_id = (select id from versions where ab = $1 and test_id = $2)', ['b', test.id]),
+            t1.query('select * from clicks where version_id = (select id from versions where ab = $1 and test_id = $2)', ['b', test.id]),
+          ]);
+        })
+        .then(testData => {
+          allResults.push({
+            testName: test.name,
+            testId: test.id,
+            data: testData,
+          });
           counter++;
           if (counter === tests.length) {
-            console.log('results', results);
+            const allResultsFormatted = allResults.map(result => {
+              const dataArrays = result.data;
+              result.data = {};
+              result.data.aVisitsData = dataArrays[0];
+              result.data.aClicksData = dataArrays[1];
+              result.data.bVisitsData = dataArrays[2];
+              result.data.bClicksData = dataArrays[3];
+              return result;
+            });
+            cb(null, allResultsFormatted);
           }
+        })
+        .catch(err => {
+          console.log('err', err);
+          return cb(err, null);
         });
       });
   });
