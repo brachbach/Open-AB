@@ -79,6 +79,16 @@ describe('DB Queries for API Server', () => {
       IPAddress: '127.0.0.2',
       time: 2467249322489,
     },
+    {
+      versionId: 3,
+      IPAddress: '2.2.2.2',
+      time: 3467249322489,
+    },
+    {
+      versionId: 3,
+      IPAddress: '2.2.2.2',
+      time: 4467249322489,
+    },
   ];
 
   const clicksData = [
@@ -294,7 +304,11 @@ describe('DB Queries for API Server', () => {
         eventQry.hearVisit(visitsData[1], (err, result) => {
           eventQry.hearClick(clicksData[0], (err, result) => {
             eventQry.hearClick(clicksData[1], (err, result) => {
-              done();
+              eventQry.hearVisit(visitsData[2], (err, result) => {
+                eventQry.hearVisit(visitsData[3], (err, result) => {
+                  done();
+                });
+              });
             });
           });
         });

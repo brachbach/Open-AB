@@ -11,18 +11,15 @@ exports.getAllResults = (cb) => {
       .then(tests => {
         console.log('tests:', tests);
         return tests.map(test => {
+          console.log('test.id', test.id);
           t1.task(t2 => {
-            return t2.batch([
-              t2.query('select * from visits where test_id = (select id from versions where ab = $1 && test_id = $2)', ['a',test.id]),
-              t2.query('select * from visits where test_id = (select id from versions where ab = $1 && test_id = $2)', ['b',test.id]),
-              t2.query('select * from clicks where test_id = (select id from versions where ab = $1 && test_id = $2)', ['a',test.id]),
-              t2.query('select * from clicks where test_id = (select id from versions where ab = $1 && test_id = $2)', ['b',test.id]),
-            ]);
+            t2.query('select * from visits where version_id = (select id from versions where ab = $1 and test_id = $2)', ['a', test.id])
+            .then(response => console.log('response:', response));
           });
         });
       })
       .then(testsData => {
-        return console.log(testsData);
+        return console.log('testsData:', testsData);
       });
   })
   .then(function (data) {
