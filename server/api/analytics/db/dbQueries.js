@@ -5,8 +5,76 @@ const uuid = require('uuid');
 
 // get all results in DB
 exports.getAllResults = (cb) => {
-  db.query(qry.getAllResults, cb);
+
+  dbpgp.task(t => {
+    return t.query("select * from tests")
+      .then(tests => {
+        return tests.forEach(test => {
+          t.query('select * from visits where (select id from versions where ab = "a" && test_id = $1)', [test.id])
+            .then(visits => {
+              return console.log(visits);
+            });
+        });
+      })
+  })
+  .then(function (data) {
+      // success;
+  })
+  .catch(function (error) {
+      // failed;    
+  });
 };
+
+
+// [ anonymous {
+//     id: 1,
+//     page_id: 1,
+//     name: 'test1',
+//     result_a: 0,
+//     result_b: 0,
+//     uniqueid: '160a84f9-f352-40c3-abbe-bdf34a26348f' },
+//   anonymous {
+//     id: 2,
+//     page_id: 1,
+//     name: 'test2',
+//     result_a: 0,
+//     result_b: 0,
+//     uniqueid: '0bd031ef-203e-4263-885b-3e9a4c738ffe' },
+//   anonymous {
+//     id: 3,
+//     page_id: 2,
+//     name: 'test3',
+//     result_a: 0,
+//     result_b: 0,
+//     uniqueid: '46344a54-b3b1-44cd-9282-c4a50aeecc98' },
+//   anonymous {
+//     id: 4,
+//     page_id: 2,
+//     name: 'test4',
+//     result_a: 0,
+//     result_b: 0,
+//     uniqueid: '09642550-261a-4ba4-a2fc-f0fdb5bb6b6b' } ]
+
+
+// db.task(function (t) {
+//         // this = t = task protocol context;
+//         // this.ctx = task config + state context;
+//         return t.one("select * from users where id=$1", 123)
+//             .then(function (user) {
+//                 return t.any("select * from events where login=$1", user.name);
+//             });
+//     })
+//     .then(function (events) {
+//         // success;
+//     })
+//     .catch(function (error) {
+//         console.log("ERROR:", error.message || error);    
+//     });
+
+
+
+
+
 
 exports.createPage = (pageName, clientEmail, cb) => {
   db.query({

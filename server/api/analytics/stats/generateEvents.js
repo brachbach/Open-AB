@@ -115,7 +115,7 @@ const generateDataForMultipleTests = (paramsForAllTests) => {
 // generateDataForMultipleTestsWithDefaultParams produces data of the form:
 // [
 //   {
-//     testName: 'buyNowButtonTest',
+//     testName: 'Buy Now Button Test',
 //     testId: '3874E76',
 //     data: {
 //       aVisitsData: [~, ~, ...],
