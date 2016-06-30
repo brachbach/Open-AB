@@ -31,36 +31,30 @@ const insertClientHardcodedData = cb => {
 };
 
 const insertClientData = () => {
-  async.series([
-    CB => {
-      async.each(clientData, 
+  async.each(clientData,
 
-        (testData, cb) => {
-          analyticsQry.createTest(testData, client.email, 
-            (err, result) => {
-              if (err) {
-                console.log(err);
-              } else {
-                cb();
-              }
-            }
-          );
-        },
-
-        (err) => {
+    (testData, cb) => {
+      console.log('testData', testData);
+      analyticsQry.createTest(testData, client.email,
+        (err, result) => {
           if (err) {
             console.log(err);
           } else {
-            CB();
+            cb();
           }
         }
       );
-    };
-  ],
+    },
 
-  (err, result) => {
-    console.log(err, result);
-  });
+    (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('inserted tests');
+        return;
+      }
+    }
+  );
 };
 
 insertClientHardcodedData(insertClientData);
