@@ -6,27 +6,21 @@ const uuid = require('uuid');
 // get all results in DB
 exports.getAllResults = (cb) => {
 
-  dbpgp.task(t1 => {
-    return t1.query("select * from tests")
-      .then(tests => {
-        console.log('tests:', tests);
-        return tests.map(test => {
-          console.log('test.id', test.id);
-          t1.task(t2 => {
-            t2.query('select * from visits where version_id = (select id from versions where ab = $1 and test_id = $2)', ['a', test.id])
-            .then(response => console.log('response:', response));
-          });
+  dbpgp.query("select * from tests")
+    .then(tests => {
+      // console.log('tests:', tests);
+      results = [];
+      counter = 0
+      return tests.forEach(test => {
+        dbpgp.query('select * from visits where version_id = (select id from versions where ab = $1 and test_id = $2)', ['a', test.id])
+        .then(response => {
+          results.push([test, response]);
+          counter++;
+          if (counter === tests.length) {
+            console.log('results', results);
+          }
         });
-      })
-      .then(testsData => {
-        return console.log('testsData:', testsData);
       });
-  })
-  .then(function (data) {
-      // success;
-  })
-  .catch(function (error) {
-      // failed;  
   });
 };
 
