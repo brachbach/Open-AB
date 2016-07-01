@@ -124,5 +124,7 @@ const insertAllEvents = allEvents => {
   });
 };
 
+module.exports = () => insertClientHardcodedData(() => insertClientData(() => insertAllEvents(eventsForAllTests)));
+
 insertClientHardcodedData(() => insertClientData(() => insertAllEvents(eventsForAllTests)));
 
