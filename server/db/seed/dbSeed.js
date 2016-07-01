@@ -1,7 +1,7 @@
 const async = require('async');
 
 const generateEvents = require('../../api/analytics/stats/generateEvents.js');
-const clientData = require('../../api/clientData.js');
+const allClientData = require('../../api/clientData.js');
 const dbQry = require('./db/dbQueries');
 const analyticsQry = require('../../api/analytics/db/dbQueries.js');
 const listeningQry = require('../../../server/listening/events/db/dbQueries.js');
@@ -18,12 +18,14 @@ const clientHardcodedData = [
   },
 ];
 
-const client = clientHardcodedData[0];
-const page = client.pages[0];
+const allEventsForAllTests = generateEvents.generateDataForMultipleTestsWithDefaultParams();
 
-const eventsForAllTests = generateEvents.generateDataForMultipleTestsWithDefaultParams();
+const client = clientHardcodedData[0];
 
 const insertClientHardcodedData = callback => {
+
+  const page = client.pages[0];
+
   dbQry.insertClient(client.email, client.password, () => {
     console.log('inserting client');
     dbQry.insertPage(page.pageName, client.email, () => {
@@ -33,11 +35,10 @@ const insertClientHardcodedData = callback => {
   });
 };
 
-const insertClientData = callback => {
+const insertClientData = (clientData, callback) => {
   async.each(clientData,
 
     (testData, cb) => {
-      console.log('testData', testData);
       analyticsQry.createTest(testData, client.email,
         (err, result) => {
           if (err) {
@@ -114,8 +115,8 @@ const insertVersionClicks = (clicksArray, versionId) => {
   );
 };
 
-const insertAllEvents = allEvents => {
-  allEvents.forEach((test, testIdx) => {
+const insertEvents = events => {
+  events.forEach((test, testIdx) => {
     const { aVisitsData, aClicksData, bVisitsData, bClicksData } = test.data;
     insertVersionVisits(aVisitsData, ((testIdx * 2) + 1));
     insertVersionClicks(aClicksData, ((testIdx * 2) + 1));
@@ -124,7 +125,6 @@ const insertAllEvents = allEvents => {
   });
 };
 
-module.exports = () => insertClientHardcodedData(() => insertClientData(() => insertAllEvents(eventsForAllTests)));
-
-insertClientHardcodedData(() => insertClientData(() => insertAllEvents(eventsForAllTests)));
+exports.seedAllData = () => insertClientHardcodedData(() => insertClientData(allClientData, () => insertEvents(allEventsForAllTests)));
+exports.seedTestData = () => insertClientHardcodedData(() => insertClientData(allClientData, () => insertEvents(allEventsForAllTests)));
 

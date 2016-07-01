@@ -17,7 +17,6 @@ const analyticQry = require('../../../server/api/analytics/db/dbQueries');
 const eventQry = require('../../../server/listening/events/db/dbQueries');
 
 const clientData = require('../../../server/api/clientData.js');
-console.log(clientData);
 
 describe('Client Queries from Auth Service for API Server', () => {
 
@@ -41,8 +40,8 @@ describe('Client Queries from Auth Service for API Server', () => {
   });
 
   it('Should create correct data', done => {
-    console.log(allResults[0].data.aVisitsData[0].time);
     expect(allResults[0].data.aVisitsData[0].time).to.be.a('number');
+    expect(allResults[1].data.bClicksData[1].IPAddress).to.be.a('string');
     done();
   });
 
