@@ -20,8 +20,8 @@ const formatEventArrays = eventArrays => {
 exports.getAllResults = (cb) => {
   dbpgp.query('select * from tests')
     .then(tests => {
-      allResults = [];
-      counter = 0;
+      const allResults = [];
+      let counter = 0;
       return tests.forEach(test => {
         dbpgp.task(t1 => {
           return t1.batch([
