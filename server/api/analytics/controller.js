@@ -1,6 +1,7 @@
 const dbQry = require('./db/dbQueries');
 const generateEvents = require('./stats/generateEvents.js');
 const chiSquareAnalysis = require('./stats/chiSquareAnalysis.js');
+const formatChartData = require('./stats/count');
 
 const convertDataFormatToTimeFormatForResults = (DataFormattedResults) => {
   return DataFormattedResults.map(test => {
@@ -17,6 +18,17 @@ const convertDataFormatToTimeFormatForResults = (DataFormattedResults) => {
     };
   });
 };
+
+let formattedResults;
+
+dbQry.getAllResults((error, results) => {
+  if (error) {
+    console.error(error);
+    return next(error);
+  } else {
+    formattedResults = convertDataFormatToTimeFormatForResults(results);
+  }
+});
 
 exports.getAll = (req, res, next) => {
   dbQry.getAllResults((error, result) => {
@@ -46,20 +58,13 @@ exports.createTest = (req, res, next) => {
 };
 
 exports.getAllStats = (req, res, next) => { // use dbQry as an arg for testing purposes?
-  dbQry.getAllResults((error, results) => {
-    if (error) {
-      return next(error);
-    }
-    const formattedResults = convertDataFormatToTimeFormatForResults(results);
-    const testStats = chiSquareAnalysis.computeStatsForAllTests(formattedResults);
-    res.status(200).json(testStats);
-  });
+  const testStats = chiSquareAnalysis.computeStatsForAllTests(formattedResults);
+  res.status(200).json(testStats);
 };
 
-// test controller func for LineChart
-const count = require('./stats/count');
 exports.getChartData = (req, res, next) => {
-  res.status(200).send(count.results);
+  const count = formatChartData.processAllTestsDataIntoResults(formattedResults);
+  res.status(200).json(count);
 };
 
 exports.getMapClicks = (req, res, next) => {
