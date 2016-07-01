@@ -35,20 +35,25 @@ const insertClientHardcodedData = callback => {
   });
 };
 
-const insertClientData = (clientData, callback) => {
-  async.each(clientData,
-
-    (testData, cb) => {
+const insertClientData = (dataForAllTests, callback) => {
+  const series = dataForAllTests.map(testData => {
+    return (cb) => {
       analyticsQry.createTest(testData, client.email,
+      
         (err, result) => {
           if (err) {
-            console.log(err);
+            cb(err);
           } else {
-            cb();
+            cb(null, 'inserted test');
           }
         }
       );
-    },
+    };
+  });
+
+  // console.log('series:', series);
+
+  async.series(series,
 
     (err) => {
       if (err) {
