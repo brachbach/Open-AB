@@ -155,7 +155,7 @@ exports.generateDataForMultipleTestsWithDefaultParams = generateDataForMultipleT
 //   ...
 // ]
 
-exports.generateTimesForMultipleTestsWithDefaultParams = () => {
+exports.generateTimesForMultipleTestsWithDefaultParams = () => {  //TODO: remove this once it is no longer necessary
   const tests = generateDataForMultipleTestsWithDefaultParams();
   return tests.map(test => {
     const timesByVersionAndType = {};
