@@ -60,12 +60,11 @@ const insertClientData = callback => {
   );
 };
 
-const insertVersionVisits = (visitsArray) => {
+const insertVersionVisits = (visitsArray, versionId) => {
   async.each(visitsArray,
 
     (visit, cb) => {
-      console.log('visit', visit);
-      visit.versionId = 1;
+      visit.versionId = versionId;
       listeningQry.hearVisit(visit,
         (err, result) => {
           if (err) {
@@ -88,5 +87,42 @@ const insertVersionVisits = (visitsArray) => {
   );
 };
 
-insertClientHardcodedData(() => insertClientData(() => insertVersionVisits(eventsForAllTests[0].data.aVisitsData)));
+const insertVersionClicks = (clicksArray, versionId) => {
+  async.each(clicksArray,
+
+    (click, cb) => {
+      click.versionId = versionId;
+      listeningQry.hearClick(click,
+        (err, result) => {
+          if (err) {
+            console.log(err);
+          } else {
+            cb();
+          }
+        }
+      );
+    },
+
+    (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('inserted clicks');
+        return;
+      }
+    }
+  );
+};
+
+const insertAllEvents = allEvents => {
+  allEvents.forEach((test, testIdx) => {
+    const { aVisitsData, aClicksData, bVisitsData, bClicksData } = test.data;
+    insertVersionVisits(aVisitsData, ((testIdx * 2) + 1));
+    insertVersionClicks(aClicksData, ((testIdx * 2) + 1));
+    insertVersionVisits(bVisitsData, (((testIdx * 2) + 1) + 1));
+    insertVersionClicks(bClicksData, (((testIdx * 2) + 1) + 1));
+  });
+};
+
+insertClientHardcodedData(() => insertClientData(() => insertAllEvents(eventsForAllTests)));
 
