@@ -33,7 +33,7 @@ exports.countIntoBuckets = (upperLimitOfBuckets, arr) => {
   }, []);
 };
 
-exports.processSingleTestDataIntoResults = processSingleTestDataIntoResults =(aClicks, bClicks, aVisits, bVisits, bucketWidth = 1) => {
+exports.processSingleTestDataIntoResults = processSingleTestDataIntoResults = (aClicks, bClicks, aVisits, bVisits, bucketWidth = 1) => {
   const TotalVisits = aVisits.concat(bVisits).sort((a, b) => a - b);
 
   const buckets = exports.createBuckets(bucketWidth * 24 * 60 * 60 * 1000, TotalVisits);
@@ -59,9 +59,9 @@ exports.processSingleTestDataIntoResults = processSingleTestDataIntoResults =(aC
 exports.processAllTestsDataIntoResults = testsData => {
   return testsData.map(testData => {
     return {
-    testName: testData.testName,
-    testId: testData.testId,
-    data: exports.processSingleTestDataIntoResults(
+      testName: testData.testName,
+      testId: testData.testId,
+      data: exports.processSingleTestDataIntoResults(
                     testData.data.aClicks,
                     testData.data.bClicks,
                     testData.data.aVisits,

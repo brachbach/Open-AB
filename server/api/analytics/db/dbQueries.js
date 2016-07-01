@@ -18,8 +18,7 @@ const formatEventArrays = eventArrays => {
 };
 
 exports.getAllResults = (cb) => {
-
-  dbpgp.query("select * from tests")
+  dbpgp.query('select * from tests')
     .then(tests => {
       allResults = [];
       counter = 0;
@@ -33,7 +32,6 @@ exports.getAllResults = (cb) => {
           ]);
         })
         .then(testData => {
-
           const data = formatEventArrays(testData);
 
           allResults.push({

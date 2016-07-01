@@ -1,9 +1,8 @@
 const dbQry = require('./db/dbQueries');
-const generateEvents = require('./stats/generateEvents.js');
 const chiSquareAnalysis = require('./stats/chiSquareAnalysis.js');
 const formatChartData = require('./stats/count');
 
-const convertDataFormatToTimeFormatForResults = (DataFormattedResults) => {
+const convertResultsToTimeArrayFormat = (DataFormattedResults) => {
   return DataFormattedResults.map(test => {
     const timesByVersionAndType = {};
     const data = test.data;
@@ -21,12 +20,12 @@ const convertDataFormatToTimeFormatForResults = (DataFormattedResults) => {
 
 let formattedResults;
 
-dbQry.getAllResults((error, results) => {
+dbQry.getAllResults((error, results, next) => {
   if (error) {
     console.error(error);
     return next(error);
   } else {
-    formattedResults = convertDataFormatToTimeFormatForResults(results);
+    formattedResults = convertResultsToTimeArrayFormat(results);
   }
 });
 
@@ -59,12 +58,20 @@ exports.createTest = (req, res, next) => {
 
 exports.getAllStats = (req, res, next) => { // use dbQry as an arg for testing purposes?
   const testStats = chiSquareAnalysis.computeStatsForAllTests(formattedResults);
-  res.status(200).json(testStats);
+  if (!testStats) {
+    next();
+  } else {
+    res.status(200).json(testStats);
+  }
 };
 
 exports.getChartData = (req, res, next) => {
   const count = formatChartData.processAllTestsDataIntoResults(formattedResults);
-  res.status(200).json(count);
+  if (!count) {
+    next();
+  } else {
+    res.status(200).json(count);
+  }
 };
 
 exports.getMapClicks = (req, res, next) => {

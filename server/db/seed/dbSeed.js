@@ -23,7 +23,6 @@ const allEventsForAllTests = generateEvents.generateDataForMultipleTestsWithDefa
 const client = clientHardcodedData[0];
 
 const insertClientHardcodedData = callback => {
-
   const page = client.pages[0];
 
   dbQry.insertClient(client.email, client.password, () => {
@@ -39,7 +38,7 @@ const insertClientData = (dataForAllTests, callback) => {
   const series = dataForAllTests.map(testData => {
     return (cb) => {
       analyticsQry.createTest(testData, client.email,
-      
+
         (err, result) => {
           if (err) {
             cb(err);
