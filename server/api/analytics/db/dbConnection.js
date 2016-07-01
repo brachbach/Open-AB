@@ -6,11 +6,11 @@ const clientLink = `postgres://${cfg.db.host}:${cfg.db.port}/${cfg.db.dbName}`;
 
 // callback that allows for connection to the database
 module.exports.pg = {
-  query: (text, cb) => {
+  query: (text, cb, done) => {
     pg.connect(clientLink, (err, client) => {
       if (client) {
         client.query(text, (error, result) => {
-          client.end();
+          done();
           cb(error, result);
         });
       } else {
