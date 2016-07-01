@@ -7,12 +7,13 @@ const uuid = require('uuid');
 
 const formatEventArrays = eventArrays => {
   return eventArrays.map(eventArray => {
-    return eventArray.map(event => {
+    const mappedArray =  eventArray.map(event => {
       return {
         IPAddress: event.ipaddress,
         time: Number(event.time),
       };
     });
+    return mappedArray.sort((eventA, eventB) => eventA.time - eventB.time);
   });
 };
 
