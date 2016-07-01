@@ -39,14 +39,14 @@ CREATE TABLE visits (
   id SERIAL PRIMARY KEY,
   version_id integer REFERENCES versions (id),
   ipaddress VARCHAR(50),
-  time VARCHAR(50)
+  time bigint
 );
 
 CREATE TABLE clicks (
   id SERIAL PRIMARY KEY,
   version_id integer REFERENCES versions (id),
   ipaddress VARCHAR(50),
-  time VARCHAR(50)
+  time bigint
 );
 
 \c test
@@ -84,12 +84,12 @@ CREATE TABLE visits (
   id SERIAL PRIMARY KEY,
   version_id integer REFERENCES versions (id),
   ipaddress VARCHAR(50),
-  time VARCHAR(50)
+  time bigint
 );
 
 CREATE TABLE clicks (
   id SERIAL PRIMARY KEY,
   version_id integer REFERENCES versions (id),
   ipaddress VARCHAR(50),
-  time VARCHAR(50)
+  time bigint
 );

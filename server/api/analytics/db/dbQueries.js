@@ -4,6 +4,18 @@ const qry = require('./dbQryStrs');
 const uuid = require('uuid');
 
 // get all results in DB
+
+const formatEventArrays = eventArrays => {
+  return eventArrays.map(eventArray => {
+    return eventArray.map(event => {
+      return {
+        IPAddress: event.ipaddress,
+        time: Number(event.time),
+      };
+    });
+  });
+};
+
 exports.getAllResults = (cb) => {
 
   dbpgp.query("select * from tests")
@@ -20,10 +32,13 @@ exports.getAllResults = (cb) => {
           ]);
         })
         .then(testData => {
+
+          const data = formatEventArrays(testData);
+
           allResults.push({
             testName: test.name,
             testId: test.id,
-            data: testData,
+            data,
           });
           counter++;
           if (counter === tests.length) {

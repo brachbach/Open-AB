@@ -39,4 +39,11 @@ describe('Client Queries from Auth Service for API Server', () => {
     expect(allResults[0].testName).to.be.oneOf(testNames);
     done();
   });
+
+  it('Should create correct data', done => {
+    console.log(allResults[0].data.aVisitsData[0].time);
+    expect(allResults[0].data.aVisitsData[0].time).to.be.a('number');
+    done();
+  });
+
 });
