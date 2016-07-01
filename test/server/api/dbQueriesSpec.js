@@ -317,9 +317,15 @@ describe('DB Queries for API Server', () => {
 
     it('Should get all tests, regardless of client email', done => {  //TODO: add more tests here
       analyticQry.getAllResults((err, result) => {
+        const bVisits = result[0].data.bVisitsData;
+
         expect(result).to.exist;
         expect(result.length).to.equal(4);
         expect(result[0].testName).to.be.oneOf(['test1', 'test2', 'test3', 'test4']);
+
+        for (let i = 0; i < bVisits.length - 1; i++) {
+          expect(bVisits[i + 1].time).to.be.above(bVisits[i].time); // only comes into play when testing against more realistic data
+        }
         // expect(result[1].data.aVisitData[0].ipAddress).to.equal('127.0.0.1');
         done();
       });
