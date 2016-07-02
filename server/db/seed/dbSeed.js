@@ -130,6 +130,6 @@ const insertEvents = events => {
   });
 };
 
-exports.seedAllData = insertClientHardcodedData(() => 5); // () => insertClientHardcodedData(() => insertClientData(allClientData, () => insertEvents(allEventsForAllTests)));
+exports.seedAllData = () => insertClientHardcodedData(() => 5); // () => insertClientHardcodedData(() => insertClientData(allClientData, () => insertEvents(allEventsForAllTests)));
 exports.seedTestData = () => insertClientHardcodedData(() => insertClientData(allClientData, () => insertEvents(allEventsForAllTests)));
 
