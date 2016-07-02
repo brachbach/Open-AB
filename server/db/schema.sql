@@ -6,6 +6,8 @@ CREATE DATABASE test;
 
 \c openab
 
+DROP TABLE IF EXISTS clients, pages, tests, versions, visits, clicks
+
 CREATE TABLE clients (
  id SERIAL PRIMARY KEY,
  email VARCHAR(50) UNIQUE,

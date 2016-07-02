@@ -26,15 +26,15 @@ const insertClientHardcodedData = callback => {
   const page = client.pages[0];
 
   dbQry.insertClient(client.email, client.password, (err, result) => {
-    // console.log('inserting client');
-    // dbQry.insertPage(page.pageName, client.email, () => {
-      // console.log('inserting page');
-    if (err) {
-      console.error(err);
-    } else {
-    callback();
-    }
-    // });
+    console.log('inserting client');
+    dbQry.insertPage(page.pageName, client.email, () => {
+      console.log('inserting page');
+      if (err) {
+        console.error(err);
+      } else {
+      callback();
+      }
+    });
   });
 };
 
@@ -134,6 +134,6 @@ const insertEvents = events => {
   });
 };
 
-exports.seedAllData = () => insertClientHardcodedData(() => 5); // () => insertClientHardcodedData(() => insertClientData(allClientData, () => insertEvents(allEventsForAllTests)));
+exports.seedAllData = () => insertClientHardcodedData(() => insertClientData(allClientData, () => insertEvents(allEventsForAllTests)));
 exports.seedTestData = () => insertClientHardcodedData(() => insertClientData(allClientData, () => insertEvents(allEventsForAllTests)));
 
