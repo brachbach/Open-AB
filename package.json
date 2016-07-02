@@ -14,7 +14,7 @@
     "test:client": "karma start",
     "test:backend": "npm run test:stats && npm run test:count && npm run test:api-db && npm run test:lstn-db && npm run test:listening && npm run test:server && pkill -n node && npm run test:error",
     "test:stats": "mocha --bail test/server/api/statsSpec.js",
-    "test:api-db": "mocha --bail test/server/api/dbQueriesSpec.js",
+    "test:api-db": "NODE_ENV=test mocha --bail test/server/api/dbQueriesSpec.js",
     "test:lstn-db": "mocha --bail test/server/listening/dbQueriesSpec.js",
     "test:listening": "NODE_ENV=test PORT=9999 node server/listening/index.js & mocha --bail test/server/listening/integrationSpec.js; pkill -n node;",
     "test:server": "mocha --bail test/server/api/integrationSpec.js;",

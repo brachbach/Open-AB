@@ -1,8 +1,6 @@
 module.exports = (() => {
   const env = process.env.NODE_ENV;
-  if (env === 'test') {
-    return 'postgres://localhost:5432/test';
-  } else if (env === 'deployed') {
+  if (env === 'deployed') {
     return {
       user: 'openab',
       database: 'openab',
@@ -11,5 +9,6 @@ module.exports = (() => {
       port: 5432,
     };
   }
-  return 'postgres://localhost:5432/openab';
+  const db = process.env.NODE_ENV || 'openab';
+  return `postgres://localhost:5432/${db}`;
 })();
