@@ -35,6 +35,7 @@ const insertClientHardcodedData = callback => {
 };
 
 const insertClientData = (dataForAllTests, callback) => {
+  console.log('inserting tests');
   const series = dataForAllTests.map(testData => {
     return (cb) => {
       analyticsQry.createTest(testData, client.email,
