@@ -5,7 +5,7 @@ import uuid from 'uuid';
 import LineChart from '../components/LineChart';
 import TestTitle from '../components/TestTitle';
 import formatStats from '../formatStats.js';
-import StatsForTest from '../components/statsForTest.js';
+import StatsForTest from '../components/StatsForTest.js';
 import '../assets/styles/_utils.scss';
 
 const statsEndpoint = '/api/dashData';
