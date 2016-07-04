@@ -6,7 +6,7 @@
     "dev:api-server": "NODE_ENV=development SERVER=local nodemon server/api/index.js",
     "deployed:api-server": "NODE_ENV=production SERVER=deployed nodemon server/api/index.js",
     "dev:listening-server": "nodemon server/listening/index.js",
-    "deployed:listening-server": "NODE_ENV=production SERVER=deployed PORT=8080 nodemon server/listening/index.js",
+    "deployed:listening-server": "NODE_ENV=production SERVER=deployed nodemon server/listening/index.js",
     "example:client": "node exampleClientSite/index.js",
     "test": "npm run test:api-server & npm run test:backend && npm run test:client; pkill -n node;",
     "test:client": "karma start",
