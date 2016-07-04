@@ -5,7 +5,7 @@
   "scripts": {
     "demo": "npm run build & npm run api-server & npm run listener & npm run example:client",
     "build": "webpack --watch",
-    "api-server": "nodemon server/api/index.js",
+    "api-server": "NODE_ENV=dev nodemon server/api/index.js",
     "api:deployed-server": "NODE_ENV=deployed nodemon server/api/index.js",
     "listener": "nodemon server/listening/index.js",
     "listener:deployed-server": "NODE_ENV=deployed PORT=8080 nodemon server/listening/index.js",
