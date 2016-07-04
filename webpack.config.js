@@ -3,8 +3,6 @@ const webpack = require('webpack');
 
 const PROD = (process.env.NODE_ENV === 'production');
 
-console.log(process.env.NODE_ENV);
-
 module.exports = {
   entry: PROD ? ['./client/index'] : ['webpack-hot-middleware/client', './client/index'],
   output: {

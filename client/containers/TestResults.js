@@ -32,8 +32,6 @@ class TestResults extends Component {
     const { stats } = this.props;
     const viewableStatsForAllTests = formatStats(stats);
 
-    console.log('process.env.NODE_ENV', process.env.NODE_ENV);
-
     let dashData = viewableStatsForAllTests.map((viewableStatsForTest, i) =>
       (<div>
         <TestTitle key={uuid.v4()} viewableStatsForTest={viewableStatsForTest} />
