@@ -104,6 +104,7 @@
     "request-ip": "^1.2.2",
     "resolve-url-loader": "^1.4.4",
     "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
     "url-loader": "^0.5.7"
   }
 }
