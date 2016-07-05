@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 
 function LandingPageCenter() {
   return (
-    <div className="mainColor center">
+    <div className="mainColor mediumBlock">
       <Link to="/Dashboard">Go to Dashboard</Link>
     </div>
   );
