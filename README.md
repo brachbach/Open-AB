@@ -1,3 +1,4 @@
+![](https://drive.google.com/file/d/0B5iLKPD5sQz1SGl1UDJhR0x5THM/view?usp=sharing)
 # Open-AB
 [![Build Status](https://travis-ci.org/Open-AB/Open-AB.svg?branch=develop)](https://travis-ci.org/Open-AB/Open-AB)
 
