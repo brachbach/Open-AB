@@ -13,6 +13,8 @@ Start testing your website today at http://50.112.197.243/ !
 - Backend: [Node.js](https://nodejs.org/en/), [Express](http://expressjs.com/), [Passport](http://passportjs.org/), and [Postgres](http://www.postgresql.org/)
 - Testing: [Mocha](https://mochajs.org/), [Chai](http://chaijs.com/), [Karma](https://karma-runner.github.io/1.0/index.html), and [SuperTest](https://github.com/visionmedia/supertest)
 - DevOps: [Amazon Web Services](https://aws.amazon.com/) [Travis CI](https://travis-ci.org/), [Webpack](https://webpack.github.io/), and [Babel](https://babeljs.io/)
+##System architecture
+
 
 # Dev Setup
 ## Database Setup
