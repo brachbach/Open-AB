@@ -1,4 +1,4 @@
-![](https://drive.google.com/file/d/0B5iLKPD5sQz1SGl1UDJhR0x5THM/view?usp=sharing)
+![](https://github.com/Open-AB/Open-AB/blob/develop/client/assets/images/logo.png)
 # Open-AB
 [![Build Status](https://travis-ci.org/Open-AB/Open-AB.svg?branch=develop)](https://travis-ci.org/Open-AB/Open-AB)
 
