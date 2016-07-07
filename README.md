@@ -21,6 +21,20 @@ Start testing your website today at http://50.112.197.243/ !
 ##API
 Endpoints listed [here](https://docs.google.com/document/d/1cEe9q_WKtF1gGvOY8mKO_YykiCYgUz5TyzkhNTzbVjw/edit#heading=h.3gm4p7cgyg85)
 
+#The stats
+We use a chi-square test to determine whether one version of the website leads to more conversions than the other.  
+A. Version A of the page leads to a higher proportion of conversions (a higher proportion of the people visiting the page click the "Buy Now" button) than version B
+B. B leads to more conversions than A 
+C. the results of the test were inconclusive.
+I'm trying to figure out the stats for this. My plan is:
+1. Assume that: 
+-the proportion of visitors converting on the less successful version is 0.1
+-the proportion converting on the more successful version is 0.125
+-p < 0.05
+-power = 0.8.
+According to this calculator (http://biomath.info/power/chsq.htm), that means I need 2587 people to visit each version of the page
+2. Randomly assign each visitor to one version of the page or the other
+3. Once each version of the page has gotten at least 2587 visitors, run a chi-square test (https://web.csulb.edu/~msaintg/ppa696/696stsig.htm) to determine if there was a significant difference between the results from one version to the otherr.
 
 # Dev Setup
 ## Database Setup
