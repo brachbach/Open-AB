@@ -1,10 +1,18 @@
 ![](https://github.com/Open-AB/Open-AB/blob/develop/client/assets/images/logo.png)
 # Open-AB
 [![Build Status](https://travis-ci.org/Open-AB/Open-AB.svg?branch=develop)](https://travis-ci.org/Open-AB/Open-AB)
+Start testing your website today at http://50.112.197.243/ !
+
 ![](https://github.com/brachbach/Open-AB/blob/readme/readmeImages/createTestScreenshot.png)
 ![](https://github.com/brachbach/Open-AB/blob/readme/readmeImages/testScreenshot.png)
 ![](https://github.com/brachbach/Open-AB/blob/readme/readmeImages/mapScreenshot.png)
 
+#The tech
+##Tech stack
+- Frontend: [React](https://facebook.github.io/react/), [Redux](https://github.com/reactjs/redux), [Google Charts](https://developers.google.com/chart/interactive/docs/gallery/intensitymap?csw=1), and [Chart.js](http://www.chartjs.org/)
+- Backend: [Node.js](https://nodejs.org/en/), [Express](http://expressjs.com/), [Passport](http://passportjs.org/), and [Postgres](http://www.postgresql.org/)
+- Testing: [Mocha](https://mochajs.org/), [Chai](http://chaijs.com/), [Karma](https://karma-runner.github.io/1.0/index.html), and [SuperTest](https://github.com/visionmedia/supertest)
+- DevOps: [Amazon Web Services](https://aws.amazon.com/) [Travis CI](https://travis-ci.org/), [Webpack](https://webpack.github.io/), and [Babel](https://babeljs.io/)
 
 # Dev Setup
 ## Database Setup
