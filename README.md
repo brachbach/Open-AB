@@ -1,6 +1,10 @@
 ![](https://github.com/Open-AB/Open-AB/blob/develop/client/assets/images/logo.png)
 # Open-AB
 [![Build Status](https://travis-ci.org/Open-AB/Open-AB.svg?branch=develop)](https://travis-ci.org/Open-AB/Open-AB)
+![](https://github.com/brachbach/Open-AB/blob/readme/readmeImages/createTestScreenshot.png)
+![](https://github.com/brachbach/Open-AB/blob/readme/readmeImages/testScreenshot.png)
+![](https://github.com/brachbach/Open-AB/blob/readme/readmeImages/mapScreenshot.png)
+
 
 # Dev Setup
 ## Database Setup
