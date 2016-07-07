@@ -1,4 +1,4 @@
-![](https://github.com/Open-AB/Open-AB/blob/develop/client/assets/images/logo.png)
+<img src="https://github.com/Open-AB/Open-AB/blob/develop/client/assets/images/logo.png" height=100> 
 # Open-AB
 [![Build Status](https://travis-ci.org/Open-AB/Open-AB.svg?branch=develop)](https://travis-ci.org/Open-AB/Open-AB)
 Start testing your website today at http://50.112.197.243/ !
