@@ -11,9 +11,15 @@ Start testing your website today at http://50.112.197.243/ !
 ##Tech stack
 - Frontend: [React](https://facebook.github.io/react/), [Redux](https://github.com/reactjs/redux), [Google Charts](https://developers.google.com/chart/interactive/docs/gallery/intensitymap?csw=1), and [Chart.js](http://www.chartjs.org/)
 - Backend: [Node.js](https://nodejs.org/en/), [Express](http://expressjs.com/), [Passport](http://passportjs.org/), and [Postgres](http://www.postgresql.org/)
-- Testing: [Mocha](https://mochajs.org/), [Chai](http://chaijs.com/), [Karma](https://karma-runner.github.io/1.0/index.html), and [SuperTest](https://github.com/visionmedia/supertest)
-- DevOps: [Amazon Web Services](https://aws.amazon.com/) [Travis CI](https://travis-ci.org/), [Webpack](https://webpack.github.io/), and [Babel](https://babeljs.io/)
+- Testing: [Mocha](https://mochajs.org/), [Chai](http://chaijs.com/), [Karma](https://karma-runner.github.io/1.0/index.html), [SuperTest](https://github.com/visionmedia/supertest), and [Travis CI](https://travis-ci.org/)
+- DevOps: [Amazon Web Services](https://aws.amazon.com/), [Webpack](https://webpack.github.io/), and [Babel](https://babeljs.io/)
+
 ##System architecture
+![](https://github.com/brachbach/Open-AB/blob/readme/readmeImages/architectureDiagram.png)
+##Database schema
+![](https://github.com/brachbach/Open-AB/blob/readme/readmeImages/dbSchema.png)
+##API
+Endpoints listed [here](https://docs.google.com/document/d/1cEe9q_WKtF1gGvOY8mKO_YykiCYgUz5TyzkhNTzbVjw/edit#heading=h.3gm4p7cgyg85)
 
 
 # Dev Setup
