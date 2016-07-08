@@ -22,26 +22,31 @@ Start testing your website today at http://50.112.197.243/ !
 Endpoints listed [here](https://docs.google.com/document/d/1cEe9q_WKtF1gGvOY8mKO_YykiCYgUz5TyzkhNTzbVjw/edit#heading=h.3gm4p7cgyg85)
 
 #The stats
-We use a chi-square test to determine whether one version of the website leads to more conversions than the other.  
-A. Version A of the page leads to a higher proportion of conversions (a higher proportion of the people visiting the page click the "Buy Now" button) than version B
-B. B leads to more conversions than A 
-C. the results of the test were inconclusive.
-I'm trying to figure out the stats for this. My plan is:
-1. Assume that: 
--the proportion of visitors converting on the less successful version is 0.1
--the proportion converting on the more successful version is 0.125
--p < 0.05
--power = 0.8.
-According to this calculator (http://biomath.info/power/chsq.htm), that means I need 2587 people to visit each version of the page
-2. Randomly assign each visitor to one version of the page or the other
-3. Once each version of the page has gotten at least 2587 visitors, run a chi-square test (https://web.csulb.edu/~msaintg/ppa696/696stsig.htm) to determine if there was a significant difference between the results from one version to the otherr.
+We use a chi-square test to determine whether one version of the website leads to more conversions than the other:
+*each test must run for at least a week before we provide results to make sure that the test results are stable over time
+*our [calculations](https://docs.google.com/document/d/1Mr3FmaaBa3XHmD5YNFzMHgRZAZ0258tr77ghxRxVHcQ/edit) suggest that you will need about 2600 visitors to each version of your site before we can provide a helpful test result. Once you've had enough visitors, we let you know the results of your test.
 
-# Dev Setup
+# Run OpenA/B in the dev environment
+```
+  npm install
+```
+
+After setting up the database as described below,
+```
+  npm run dev:api-server
+```
+```
+  npm run dev:listening-server
+```
+After setting up the data
 ## Database Setup
-Install Postgres (9.5.3)
-Run Postgres Database
-Find path to schema.sql file found in Open-AB/server/db/schema.sql
-In terminal run the following command to create database with schema:
+1. Install [PostgreSQL (9.5.3)](https://www.postgresql.org/download/)
+1. Run
+```
+  psql
+```
+PostgreSQL must always be running while using OpenA/B
+1. In another terminal window, find the filepath to the schema.sql file in Open-AB/server/db/schema.sql. Run the following command to create the openab db and test db:
 ```
   /Applications/Postgres.app/Contents/Versions/9.5/bin/psql < [file path to schema.sql file]/schema.sql
 ```
@@ -50,22 +55,4 @@ Seed the database with test data:
 ```
   npm run seed-db
 ```
-
-## Git workflow
-To start working on a new feature:
-```
-git checkout develop 
-git pull --rebase develop
-git checkout -b [yourFeatureName]
-```
-
-To submit a PR:
-```
-git checkout -b [yourFeatureName]Squash
-git rebase -i
-  -squash your changes into ~3 commits with strong commit messages
-git push origin [yourFeatureName]Squash
-```
-submit a pull request to the "develop" branch
-
 
