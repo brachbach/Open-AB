@@ -60,3 +60,8 @@ Seed the database with test data:
   npm run seed-db
 ```
 
+#Team
+- [David Doan](https://github.com/david-doan)
+- [John Jenson](https://github.com/JRRJ)
+- [Ben Rachbach](https://github.com/brachbach)
+- [Jen Wong](https://github.com/jenjwong)
